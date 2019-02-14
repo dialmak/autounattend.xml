@@ -1,0 +1,230 @@
+<!--**********************************************************************************************************************************************************
+Answer File autounattend.xml by dialmak
+
+Поддерживается автоактивация для
+- Windоws 7 Enterprise\Professional\POSReady\ThinPC
+- Windows 8.1 Enterprise\Professional\Embedded Industry Enterprise\Embedded Industry Professional
+- Windows 10 Education\Enterprise\Professional\Home
+Внимание! Для автоактивации требуется интернет при установке Windоws! 
+Исключение Windоws 7 POSReady, она активируется просто ключем ;)
+
+При установке потребуется указать только редакцию и диск\раздел для установки, при желании и это можно автоматизировать.
+Измените следующие параметры:
+- имя пользователя dialmak на свое
+- часовой пояс FLE Standard Time на свой, который можно посмотреть по команде tzutil /l | more
+- языковые настройки ru-RU на язык дистрибутива Windows, например uk-UA
+ 
+Язык ввода InputLocale можно указать для нескольких языков, например <InputLocale>en-US;ru-RU</InputLocale>
+Внимание! Если языковые настройки не соответствуют дистрибутиву - вы получите запрос языковых параметров!
+
+Порядок поиска неявно заданного файла ответов см. на офсайте https://msdn.microsoft.com/ru-ru/library/windows/hardware/dn938367(v=vs.85).aspx
+***************************************************************************************************************************************************************-->
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+
+	<settings pass="windowsPE">
+
+		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">			
+			<SetupUILanguage>
+				<UILanguage>ru-RU</UILanguage>
+				<WillShowUI>Never</WillShowUI>
+			</SetupUILanguage>
+			<InputLocale>en-US;ru-RU</InputLocale>
+			<SystemLocale>ru-RU</SystemLocale>
+			<UILanguage>ru-RU</UILanguage>
+			<UserLocale>ru-RU</UserLocale>			
+		</component>
+
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">			
+
+			<UserData>
+				<AcceptEula>true</AcceptEula>					
+				<FullName>COMPUTER</FullName>
+				<Organization></Organization>
+				<ProductKey>
+					<Key></Key>
+					<WillShowUI>Never</WillShowUI>
+				</ProductKey>
+			</UserData>		
+		</component>
+
+	</settings>
+
+	<settings pass="offlineServicing">
+
+		<component name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<EnableLUA>true</EnableLUA>
+		</component>
+
+	</settings>
+
+	<settings pass="generalize">
+
+		<component name="Microsoft-Windows-Security-SPP" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipRearm>1</SkipRearm>
+		</component>
+
+	</settings>
+
+	<settings pass="specialize">
+
+		<component name="Microsoft-Windows-Security-SPP-UX" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<SkipAutoActivation>true</SkipAutoActivation>
+		</component>
+
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<ComputerName>*</ComputerName>
+		</component>	
+
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<InputLocale>en-US;ru-RU</InputLocale>
+			<SystemLocale>ru-RU</SystemLocale>
+			<UILanguage>ru-RU</UILanguage>
+			<UILanguageFallback>ru-RU</UILanguageFallback>
+			<UserLocale>ru-RU</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-UnattendedJoin" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+			<Identification>
+				<JoinWorkgroup>WORKGROUP</JoinWorkgroup>
+			</Identification>
+		</component>
+
+	</settings>
+
+	<settings pass="oobeSystem">
+
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">	
+
+			<RegisteredOwner>dialmak</RegisteredOwner>			
+			<TimeZone>FLE Standard Time</TimeZone>
+
+			<OOBE>
+				<HideEULAPage>true</HideEULAPage>
+				<NetworkLocation>Other</NetworkLocation>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<SkipMachineOOBE>true</SkipMachineOOBE>
+				<SkipUserOOBE>true</SkipUserOOBE>
+			</OOBE>
+
+			<AutoLogon>
+				<Password>
+					<Value></Value>
+					<PlainText>true</PlainText>
+				</Password>
+				<Enabled>true</Enabled>
+				<Username>dialmak</Username>
+			</AutoLogon>
+
+			<UserAccounts>
+				<LocalAccounts>
+					<LocalAccount wcm:action="add">
+						<Password>
+							<Value></Value>
+							<PlainText>true</PlainText>
+						</Password>
+						<Description></Description>
+						<DisplayName>dialmak</DisplayName>
+						<Group>Administrators</Group>
+						<Name>dialmak</Name>
+					</LocalAccount>
+				</LocalAccounts>
+			</UserAccounts>
+
+			<FirstLogonCommands>
+
+				<!-- Активация через публичный KMS сервер http://forum.ru-board.com/topic.cgi?forum=55&topic=12928&start=148&limit=1&m=1#1 -->
+				<SynchronousCommand wcm:action="add">					
+					<Order>1</Order>
+					<Description>Install GVLK key for Windows 7 Professional</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">					
+					<Order>2</Order>
+					<Description>Install GVLK key for Windows 7 Enterprise</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Description>Install VOLUNE:BA key for Windows 7 POSReady</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk 73Q3V-DBY4D-8C4W8-HMTKP-GDMM9</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Description>Install GVLK key for Windows 7 ThinPC</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk 73KQT-CD9G6-K7TQG-66MRP-CQ22C</CommandLine>
+				</SynchronousCommand>							
+				<SynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Description>Install GVLK key for Windows 8.1 Embedded Industry Professional</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk NMMPB-38DD4-R2823-62W8D-VXKJB</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Description>Install GVLK key for Windows 8.1 Embedded Industry Enterprise</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk FNFKF-PWTVT-9RC8H-32HB2-JB34X</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Description>Install GVLK key for Windows 8.1 Professional</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk GCRJD-8NW9H-F2CDX-CCM8D-9D6T9</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>8</Order>
+					<Description>Install GVLK key for Windows 8.1 Enterprise</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk MHF9N-XY6XB-WVXMC-BTDCT-MKKG7</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>9</Order>
+					<Description>Install GVLK key for Windows 10 Home</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk TX9XD-98N7V-6WMQ6-BX7FG-H8Q99</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>10</Order>
+					<Description>Install GVLK key for Windows 10 Professional</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>11</Order>
+					<Description>Install GVLK key for Windows 10 Enterprise</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>12</Order>
+					<Description>Install GVLK key for Windows 10 Education</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>13</Order>
+					<Description>Set KMS server</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.03k.org</CommandLine>					
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>14</Order>
+					<Description>Activation</Description>
+					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ato</CommandLine>
+				</SynchronousCommand>
+				<!-- Отключаем 'Fast startup' -->				
+				<SynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Description>Disable Hiberboot</Description>
+					<CommandLine>reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f</CommandLine>
+				</SynchronousCommand>
+				<!-- Установливаем 'Срок действия пароля не ограничен' -->				
+				<SynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Description>Password Never Expires</Description>
+					<CommandLine>cmd /C wmic useraccount where name="dialmak" set PasswordExpires=false</CommandLine>
+				</SynchronousCommand>					
+				<!-- Сюда добавляем что угодно через SynchronousCommand, например онлайн установку MS Office или ... -->                                                                     -->					
+
+			</FirstLogonCommands>
+
+		</component>
+
+	</settings>
+
+</unattend>
+
