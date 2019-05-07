@@ -240,24 +240,24 @@ Answer File autounattend.xml by dialmak
 					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ipk NW6C2-QMPVW-D7KKK-3GKT6-VCFB2</CommandLine>
 				</SynchronousCommand>
 				<SynchronousCommand wcm:action="add">
-					<Order>13</Order>
+					<Order>33</Order>
 					<Description>Set KMS server</Description>
 					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /skms kms.03k.org</CommandLine>					
 				</SynchronousCommand>
 				<SynchronousCommand wcm:action="add">
-					<Order>14</Order>
+					<Order>34</Order>
 					<Description>Activation</Description>
 					<CommandLine>cscript //nologo %windir%\system32\slmgr.vbs /ato</CommandLine>
 				</SynchronousCommand>
 				<!-- Отключаем 'Fast startup' -->				
 				<SynchronousCommand wcm:action="add">
-					<Order>15</Order>
+					<Order>35</Order>
 					<Description>Disable Hiberboot</Description>
 					<CommandLine>reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f</CommandLine>
 				</SynchronousCommand>
 				<!-- Установливаем 'Срок действия пароля не ограничен' -->				
 				<SynchronousCommand wcm:action="add">
-					<Order>16</Order>
+					<Order>36</Order>
 					<Description>Password Never Expires</Description>
 					<CommandLine>cmd /C wmic useraccount where name="dialmak" set PasswordExpires=false</CommandLine>
 				</SynchronousCommand>					
